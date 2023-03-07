@@ -7,6 +7,8 @@ import { handleRefreshToken } from "./handleRefreshToken";
 import { logOut } from "./logOut";
 import { unBlock } from "./unBlock";
 import { updatePassword } from "./updatePassword";
+import { forgotPassToken } from "./forgotPassToken";
+import { resetPassword } from "./resetPassword";
 //////////////////////////////////////////////////////
 export {
   allUsers,
@@ -18,4 +20,6 @@ export {
   handleRefreshToken,
   block,
   updatePassword,
+  forgotPassToken,
+  resetPassword
 };
