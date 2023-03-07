@@ -1,6 +1,7 @@
 import Product from "../../models/product";
 import asyncHandler from "express-async-handler";
 import { Request, Response } from "express";
+import { CError } from "../../utils/err";
 ///////////////////////////////////////////////////////////////////////////
 export const putProductId = asyncHandler(async (req: Request, res: Response) => {
   const {id} = req.params
@@ -22,6 +23,6 @@ export const putProductId = asyncHandler(async (req: Request, res: Response) => 
     //-----------------------------------------------
     res.json(updateProduct);
   } catch (err) {
-    throw new Error(err?.toString() || "Error inesperado");
+    throw CError(err, "Updated product");
   }
 });
