@@ -1,9 +1,9 @@
 import Product from "../../models/product";
 import asyncHandler from "express-async-handler";
 import { Request, Response } from "express";
+import { CError } from "../../utils/err";
 
 export const allProducts = asyncHandler(async (req: Request, res: Response) => {
-  console.log("queries => ", req.query);
   const queryObj = { ...req.query };
   const exclude = ["page", "sort", "limit", "fields"];
   exclude.forEach((el) => delete queryObj[el]);
@@ -41,6 +41,6 @@ export const allProducts = asyncHandler(async (req: Request, res: Response) => {
     const products = await query;
     res.json(products);
   } catch (err) {
-    throw new Error(err?.toString() || "Error inesperado");
+    throw CError(err, "created product");
   }
 });
