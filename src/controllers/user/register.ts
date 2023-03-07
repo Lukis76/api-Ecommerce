@@ -1,7 +1,7 @@
-
 import asyncHandler from "express-async-handler";
 import { Response, Request } from "express";
 import User from "../../models/user";
+import { CError } from "../../utils/err";
 ////////////////////////////////////////////////////////////////////////////////
 export const register = asyncHandler(async (req: Request, res: Response) => {
   //---------------------------------------------------------------------------
@@ -16,6 +16,6 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
     const newUser = await User.create(req.body);
     res.json(newUser);
   } catch (err) {
-    throw new Error(err?.toString() || "Error inesperado");
+    throw CError(err, "Register user");
   }
 });
