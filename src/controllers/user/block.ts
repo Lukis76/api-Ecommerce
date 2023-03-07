@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import User from "../../models/user";
+import { CError } from "../../utils/err";
 import { validateMongo } from "../../utils/validateMongo";
 ///////////////////////////////////////////////////////////////////////////
 export const block = asyncHandler(async (req: Request, res: Response) => {
@@ -10,12 +11,12 @@ export const block = asyncHandler(async (req: Request, res: Response) => {
   validateMongo(id);
   //----------------
   try {
-    const block = await User.findByIdAndUpdate(id, { isBlocked: true }, { new: true });
+    await User.findByIdAndUpdate(id, { isBlocked: true }, { new: true });
     //---------------------------------------------------------------------------------
     res.json({
       msg: "User Blocked",
     });
   } catch (err) {
-    throw new Error(err as string);
+    throw CError(err, "Blocked user");
   }
 });
