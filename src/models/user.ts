@@ -1,8 +1,7 @@
 import { Schema, model, Types, Document, ObjectId } from "mongoose";
 import { genSaltSync, hash, compare } from "bcrypt";
 import { IProduct } from "./product";
-import crypto from 'crypto'
-
+import crypto from "crypto";
 
 export interface IUser extends Document {
   firstname: string;
@@ -21,6 +20,8 @@ export interface IUser extends Document {
   passwordResetExpires?: Date;
   createdAt: Date;
   updatedAt: Date;
+  createPasswordToken: () => string;
+  isPasswordMatched: (enteredPassword: string) => boolean;
 }
 
 const userSchema = new Schema(
