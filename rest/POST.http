@@ -1,0 +1,88 @@
+# urls CRUD user
+#####################################################
+# Register
+POST http://localhost:4000/api/user/register
+content-type: application/json
+
+{
+  "firstname": "lucjniuebwcbas",
+  "lastname": "manoguerebvibwra",
+  "email": "lucasnwunvinrRube@gmail.com",
+  "mobile": 6787485587578537940,
+  "role": "user",
+  "password": "1234jnbhbvuehboi56"
+}
+
+#####################################################
+# Login
+POST http://localhost:4000/api/user/login
+content-type: application/json
+Cookie: refreshToken={{token}}
+
+{
+  "firstname": "lucas",
+  "lastname": "manoguerra",
+  "email": "lucasRube@gmail.com",
+  "mobile": 67874855940,
+  "role": "user",
+  "password": "123456"
+}
+
+######################################################
+# All Users
+GET http://localhost:4000/api/user/allusers
+
+######################################################
+# Methods for User Id
+GET http://localhost:4000/api/user/64013dcee73000a736ca8863
+
+######################################################
+DELETE http://localhost:4000/api/user/6400ee2e3488880a3c33e8d1
+
+######################################################
+PUT http://localhost:4000/api/user/edit
+Authorization: Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDEzZGNlZTczMDAwYTczNmNhODg2MyIsImlhdCI6MTY3NzgyOTc1MywiZXhwIjoxNjc4MDg4OTUzfQ.RjhozzW5DlQrqUY7MvCczznPONXT1r3nP2WZLAz6fkU
+content-type: application/json
+
+{
+  "firstname": "gonza",
+  "lastname": "de la guerta",
+  "email": "gonzadelauerta@gmail.com",
+  "mobile": 34445958592
+}
+
+######################################################
+GET http://localhost:4000/api/user/64013dcee73000a736ca8863
+Authorization: Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDEzZGNlZTczMDAwYTczNmNhODg2MyIsImlhdCI6MTY3NzgyOTc1MywiZXhwIjoxNjc4MDg4OTUzfQ.RjhozzW5DlQrqUY7MvCczznPONXT1r3nP2WZLAz6fkU
+
+######################################################
+GET http://localhost:4000/api/user/refresh
+content-type: application/json
+Authorization: Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDQ5YzQ3YmU1YWU4MzJhZTBkYzdjOCIsImlhdCI6MTY3ODAzNjE5NiwiZXhwIjoxNjc4Mjk1Mzk2fQ.ilq6bOdUhyTyZsHwxrl1go-PLKSKU2uw7kcreVmuHHg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
