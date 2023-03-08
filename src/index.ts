@@ -6,6 +6,7 @@ import * as dotenv from "dotenv";
 import { connectdb } from "./config/dbConnect";
 import auth from "./routes/auth";
 import product from "./routes/product";
+import blog from "./routes/blog";
 import { errorHandler, notFound } from "./middlewares/error";
 const app = express();
 
@@ -27,6 +28,7 @@ const main = async () => {
 
   app.use("/api/user", auth);
   app.use("/api/product", product);
+  app.use("/api/blog", blog);
 
   app.use(notFound);
   app.use(errorHandler);
