@@ -1,4 +1,4 @@
-import { Schema, model, Types, Document } from "mongoose";
+import { Schema, model, Document } from "mongoose";
 
 export interface IProduct extends Document {
   title: string;
@@ -11,7 +11,8 @@ export interface IProduct extends Document {
   sold: number;
   images: Array<string>;
   color: string;
-  rating: Array<number>;
+  rating: Array<{ start: number, postBy: string }>;
+  totalRating: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -62,10 +63,15 @@ const productSchema = new Schema(
     },
     rating: [
       {
-        type: Number,
-        postdBy: { type: Schema.Types.ObjectId, ref: "User" },
+        start: Number,
+
+        postBy: { type: Schema.Types.ObjectId, ref: "User" },
       },
     ],
+    totalRating: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
