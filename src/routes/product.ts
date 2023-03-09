@@ -7,12 +7,14 @@ import {
   putProductId,
   deleteProductId,
   wishList,
+  rating,
 } from "../controllers/product";
 
 const router = Router();
 
 router.post("/create", middlewareAuth, isAdmin, create);
 router.put("/wishlist", middlewareAuth, wishList);
+router.put("/rating", middlewareAuth, rating);
 router.get("/:id", getProductId);
 router.put("/:id", middlewareAuth, isAdmin, putProductId);
 router.delete("/:id", middlewareAuth, isAdmin, deleteProductId);
