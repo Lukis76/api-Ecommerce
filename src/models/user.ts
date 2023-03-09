@@ -3,13 +3,18 @@ import { genSaltSync, hash, compare } from "bcrypt";
 import { IProduct } from "./product";
 import crypto from "crypto";
 
+enum USER_ROLE {
+  USER = "user",
+  ADMIN = "admin",
+}
+
 export interface IUser extends Document {
   firstname: string;
   lastname: string;
   email: string;
   mobile: number;
   password: string;
-  role: string;
+  role: USER_ROLE;
   cart: Array<IProduct>;
   isBlocked: boolean;
   address: Array<ObjectId>;
@@ -81,7 +86,7 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.pre<IUser>("save", async function (next) {
+userSchema.pre<IUser>("save", async function (next): Promise<void> {
   if (!this.isModified("password")) {
     next();
   }
@@ -89,14 +94,14 @@ userSchema.pre<IUser>("save", async function (next) {
   this.password = await hash(this.password, salt);
 });
 
-userSchema.methods.isPasswordMatched = async function (enteredPassword: string) {
+userSchema.methods.isPasswordMatched = async function (enteredPassword: string): Promise<boolean> {
   return await compare(enteredPassword, this.password);
 };
 
-userSchema.methods.createPasswordToken = async function () {
+userSchema.methods.createPasswordToken = function (): string {
   const resetToken = crypto.randomBytes(32).toString("hex");
   this.passwordResetToken = crypto.createHash("sha256").update(resetToken).digest("hex");
-  this.passwordResetExpires = Date.now() + 30 * 60 * 1000; // 10 minutes
+  this.passwordResetExpires = Date.now() + 30 * 60 * 1000; // 30 minutes
   return resetToken;
 };
 
