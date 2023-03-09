@@ -1,7 +1,7 @@
 import Product from "../../models/product";
 import asyncHandler from "express-async-handler";
 import { Request, Response } from "express";
-import { CError } from "../../utils/err";
+import { CustomError } from "../../utils/err";
 ///////////////////////////////////////////////////////////////////////////
 export const create = asyncHandler(async (req: Request, res: Response) => {
   try {
@@ -20,8 +20,10 @@ export const create = asyncHandler(async (req: Request, res: Response) => {
     //-----------------------------------------------
     const newProduct = await Product.create(product);
     //-----------------------------------------------
+    if (!newProduct) throw new Error("Created new product failed");
+    //-----------------------------------------------
     res.json({ newProduct });
   } catch (err) {
-    throw CError(err, "created product");
+    CustomError(res, err, "created product");
   }
 });
