@@ -2,7 +2,7 @@ import Category from "../../models/category";
 import asyncHandler from "express-async-handler";
 import { Request, Response } from "express";
 import { validateMongo } from "../../utils/validateMongo";
-import { CError, CustomError } from "../../utils/err";
+import { CustomError } from "../../utils/err";
 
 export const getCategoryId = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
