@@ -8,8 +8,8 @@ export interface IBlog {
   views: number;
   isLiked: boolean;
   isDisliked: boolean;
-  likes: Array<IUser>;
-  dislikes: Array<IUser>;
+  likes: Array<IUser | string>;
+  dislikes: Array<IUser | string>;
   images: string;
   createdAt: Date;
 }
