@@ -11,10 +11,16 @@ export interface IProduct extends Document {
   sold: number;
   images: Array<string>;
   color: string;
-  rating: Array<{ start: number, postBy: string }>;
+  ratings: Array<IRating>;
   totalRating: number;
   createdAt: Date;
   updatedAt: Date;
+}
+
+interface IRating {
+  start: number;
+  comment: string;
+  postBy: string;
 }
 
 const productSchema = new Schema(
@@ -61,10 +67,10 @@ const productSchema = new Schema(
       type: String,
       require: true,
     },
-    rating: [
+    ratings: [
       {
-        start: Number,
-
+        start: { type: Number },
+        comment: { type: String },
         postBy: { type: Schema.Types.ObjectId, ref: "User" },
       },
     ],
