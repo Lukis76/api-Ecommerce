@@ -4,5 +4,6 @@ import { getProductId } from "./getProductId";
 import { putProductId } from "./putProductId";
 import { deleteProductId } from "./deleteProductId";
 import { wishList } from "./wishList";
+import { rating } from "./rating";
 
-export { create, allProducts, getProductId, putProductId, deleteProductId, wishList };
+export { create, allProducts, getProductId, putProductId, deleteProductId, wishList, rating };
