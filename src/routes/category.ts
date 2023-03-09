@@ -1,6 +1,12 @@
 import { Router } from "express";
 import { auth as middlewareAuth, isAdmin } from "../middlewares/auth";
-import { create, putCategoryId, deleteCategoryId, getCategoryId, allCategory } from "../controllers/category";
+import {
+  create,
+  putCategoryId,
+  deleteCategoryId,
+  getCategoryId,
+  allCategory,
+} from "../controllers/category";
 
 const router = Router();
 
