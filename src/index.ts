@@ -8,6 +8,7 @@ import auth from "./routes/auth";
 import product from "./routes/product";
 import blog from "./routes/blog";
 import category from "./routes/category";
+import brand from "./routes/brand";
 import { errorHandler, notFound } from "./middlewares/error";
 const app = express();
 
@@ -31,6 +32,7 @@ const main = async () => {
   app.use("/api/product", product);
   app.use("/api/blog", blog);
   app.use("/api/category", category);
+  app.use("/api/brand", brand);
 
   app.use(notFound);
   app.use(errorHandler);
