@@ -2,16 +2,15 @@ import asyncHandler from "express-async-handler";
 import { Response } from "express";
 import { CustomError } from "../../utils/err";
 import { RequestType } from "../../middlewares";
-import User from "../../models/user";
 import Product from "../../models/product";
 ///////////////////////////////////////////////////////////////////////////
 export const rating = asyncHandler(async (req: RequestType, res: Response) => {
   try {
     const { id } = req.user;
-    const { start, productId } = req.body;
+    const { start, comment, productId } = req.body;
     //-----------------------------------------------
     const product = await Product.findById(productId);
-    const allReadyRating = product?.rating.find((r) => r.postBy.toString() === id.toString());
+    const allReadyRating = product?.ratings.find((r) => r.postBy.toString() === id.toString());
     if (allReadyRating) {
       await Product.updateOne(
         {
@@ -21,7 +20,8 @@ export const rating = asyncHandler(async (req: RequestType, res: Response) => {
         },
         {
           $set: {
-            "rating.$.start": start,
+            "ratings.$.start": start,
+            "ratings.$.comment": comment, 
           },
         },
         {
@@ -33,8 +33,9 @@ export const rating = asyncHandler(async (req: RequestType, res: Response) => {
         productId,
         {
           $push: {
-            rating: {
+            ratings: {
               start,
+              comment,
               postBy: id,
             },
           },
@@ -42,11 +43,10 @@ export const rating = asyncHandler(async (req: RequestType, res: Response) => {
         { new: true }
       );
     }
-
     const allRatings = await Product.findById(productId);
-    const totalRatings = Number(allRatings?.rating?.length);
+    const totalRatings = Number(allRatings?.ratings?.length);
     const ratingsSum = Number(
-      allRatings?.rating.map((r) => r.start).reduce((prev, curr) => prev + curr, 0)
+      allRatings?.ratings.map((r) => r.start).reduce((prev, curr) => prev + curr, 0)
     );
     const actualRating = Math.round(ratingsSum / totalRatings);
     const finalProduct = await Product.findByIdAndUpdate(
@@ -62,6 +62,6 @@ export const rating = asyncHandler(async (req: RequestType, res: Response) => {
       finalProduct,
     });
   } catch (err) {
-    CustomError(res, err, "add or delete wish list");
+    CustomError(res, err, "add or updated rating");
   }
 });
