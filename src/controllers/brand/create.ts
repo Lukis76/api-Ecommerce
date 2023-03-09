@@ -1,18 +1,17 @@
-
-import Band from "../../models/band";
+import Brand from "../../models/brand";
 import asyncHandler from "express-async-handler";
 import { Request, Response } from "express";
 import { CustomError } from "../../utils/err";
 
 export const create = asyncHandler(async (req: Request, res: Response) => {
   try {
-    const newBand = await Band.create(req.body);
-    if (!newBand) throw new Error("Created new band failed");
+    const newBrand = await Brand.create(req.body);
+    if (!newBrand) throw new Error("Created new brand failed");
     res.json({
       status: "success",
-      newBand,
+      newBrand,
     });
   } catch (err) {
-    CustomError(res, err, "Created band");
+    CustomError(res, err, "Created brand");
   }
 });
