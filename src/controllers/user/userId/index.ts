@@ -3,8 +3,9 @@ import { Response, Request } from "express";
 import { getUserId } from "./getUsetId";
 import { deleteUserId } from "./deleteUserId";
 import { putUserId } from "./putUserId";
+import { RequestType } from "../../../middlewares";
 ////////////////////////////////////////////////////////////////////////////
-export const userId = asyncHandler(async (req: Request, res: Response) => {
+export const userId = asyncHandler(async (req: RequestType, res: Response) => {
   const { id } = req.params;
   try {
     if (req.method === "GET") {
