@@ -15,9 +15,3 @@ export const allBrand = asyncHandler(async (req: Request, res: Response) => {
     CustomError(res, err, "Get all brand");
   }
 });
-
-
-
-
-
-
