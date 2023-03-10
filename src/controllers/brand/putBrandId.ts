@@ -18,3 +18,4 @@ export const putBrandId = asyncHandler(async (req: Request, res: Response) => {
     CustomError(res, err, "Updated brand");
   }
 });
+
