@@ -27,7 +27,7 @@ const productSchema = new Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
       trim: true,
     },
     slug: {
@@ -36,23 +36,23 @@ const productSchema = new Schema(
     },
     description: {
       type: String,
-      require: true,
+      required: true,
     },
     price: {
       type: Number,
-      require: true,
+      required: true,
     },
     category: {
       type: String,
-      require: true,
+      required: true,
     },
     band: {
       type: String,
-      require: true,
+      required: true,
     },
     quantity: {
       type: Number,
-      require: true,
+      required: true,
       select: false,
     },
     sold: {
@@ -65,7 +65,7 @@ const productSchema = new Schema(
     },
     color: {
       type: String,
-      require: true,
+      required: true,
     },
     ratings: [
       {
