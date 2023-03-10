@@ -1,3 +1,4 @@
 import { create } from "./create";
+import { allCoupons } from "./allCoupons";
 
-export { create };
+export { create, allCoupons };
