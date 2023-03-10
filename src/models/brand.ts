@@ -4,7 +4,7 @@ const brandSchema = new Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
       index: true,
     },
