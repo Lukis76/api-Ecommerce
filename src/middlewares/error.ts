@@ -12,6 +12,7 @@ export const errorHandler = (err: Error, _req: Request, res: Response, _next: Ne
   const statusCode = res.statusCode == 200 ? 500 : res.statusCode;
   res.status(statusCode);
   res.json({
+    status: "failed",
     message: err?.message,
     stack: err?.stack,
   });
