@@ -9,10 +9,20 @@ import {
   wishList,
   rating,
 } from "../controllers/product";
+import { productImgResize, uploadPhoto } from "../middlewares/uploadImgs";
+import { uploadImgs } from "../controllers/product/uploadImgs";
 
 const router = Router();
 
 router.post("/create", middlewareAuth, isAdmin, create);
+router.put(
+  "/upload/:id",
+  middlewareAuth,
+  isAdmin,
+  uploadPhoto.array("images", 10),
+  productImgResize,
+  uploadImgs
+);
 router.put("/wishlist", middlewareAuth, wishList);
 router.put("/rating", middlewareAuth, rating);
 router.get("/:id", getProductId);
