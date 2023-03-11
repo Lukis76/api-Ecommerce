@@ -19,7 +19,7 @@ router.put(
   "/upload/:id",
   middlewareAuth,
   isAdmin,
-  uploadPhoto.array("images", 10),
+  uploadPhoto,
   productImgResize,
   uploadImgs
 );
