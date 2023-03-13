@@ -5,5 +5,15 @@ import { putProductId } from "./putProductId";
 import { deleteProductId } from "./deleteProductId";
 import { wishList } from "./wishList";
 import { rating } from "./rating";
+import { uploadImgs } from "./uploadImgs";
 
-export { create, allProducts, getProductId, putProductId, deleteProductId, wishList, rating };
+export {
+  create,
+  allProducts,
+  getProductId,
+  putProductId,
+  deleteProductId,
+  wishList,
+  rating,
+  uploadImgs,
+};
