@@ -15,10 +15,10 @@ export interface IUser extends Document {
   mobile: number;
   password: string;
   role: USER_ROLE;
-  cart: Array<IProduct>;
+  cart: Array<IProduct | string>;
   isBlocked: boolean;
-  address: Array<ObjectId>;
-  wishlist: Array<ObjectId>;
+  address: string;
+  wishlist: Array<IProduct | string>;
   refreshToken?: string;
   passwordChangeAt?: Date;
   passwordResetToken?: string;
@@ -57,6 +57,7 @@ const userSchema = new Schema(
     role: {
       type: String,
       default: "user",
+      enum: ["user", "admin"],
     },
     cart: {
       type: Array,
@@ -66,7 +67,9 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    address: [{ type: Types.ObjectId, ref: "Address" }],
+    address: {
+      type: String,
+    },
     wishlist: [{ type: Types.ObjectId, ref: "Product" }],
     refreshToken: {
       type: String,
