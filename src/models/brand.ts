@@ -1,5 +1,11 @@
 import { Schema, model } from "mongoose";
 
+interface IBrand {
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 const brandSchema = new Schema(
   {
     title: {
@@ -14,4 +20,4 @@ const brandSchema = new Schema(
   }
 );
 
-export default model("Brand", brandSchema);
+export default model<IBrand>("Brand", brandSchema);
