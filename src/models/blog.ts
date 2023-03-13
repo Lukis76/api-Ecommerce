@@ -12,6 +12,7 @@ export interface IBlog {
   dislikes: Array<IUser | string>;
   images: string;
   createdAt: Date;
+  updatedAt: Date;
 }
 
 const blogschema = new Schema(
@@ -52,10 +53,7 @@ const blogschema = new Schema(
         ref: "User",
       },
     ],
-    images: {
-      type: String,
-      default: "http://example-image.com",
-    },
+    images: [],
   },
   {
     toJSON: {
