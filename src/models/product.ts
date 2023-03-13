@@ -1,4 +1,5 @@
 import { Schema, model, Document } from "mongoose";
+import { IUser } from "./user";
 
 export interface IProduct extends Document {
   title: string;
@@ -20,7 +21,7 @@ export interface IProduct extends Document {
 interface IRating {
   start: number;
   comment: string;
-  postBy: string;
+  postBy: IUser | string;
 }
 
 const productSchema = new Schema(
@@ -60,9 +61,7 @@ const productSchema = new Schema(
       default: 0,
       select: false,
     },
-    images: {
-      type: Array,
-    },
+    images: [],
     color: {
       type: String,
       required: true,
