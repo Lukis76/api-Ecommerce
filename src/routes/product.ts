@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { auth as middlewareAuth, isAdmin } from "../middlewares/auth";
+import { auth as middlewareAuth, isAdmin, productImgResize, uploadPhoto } from "../middlewares";
 import {
   allProducts,
   getProductId,
@@ -8,21 +8,13 @@ import {
   deleteProductId,
   wishList,
   rating,
+  uploadImgs,
 } from "../controllers/product";
-import { productImgResize, uploadPhoto } from "../middlewares/uploadImgs";
-import { uploadImgs } from "../controllers/product/uploadImgs";
 
 const router = Router();
 
 router.post("/create", middlewareAuth, isAdmin, create);
-router.put(
-  "/upload/:id",
-  middlewareAuth,
-  isAdmin,
-  uploadPhoto,
-  productImgResize,
-  uploadImgs
-);
+router.put("/upload/:id", middlewareAuth, isAdmin, uploadPhoto, productImgResize, uploadImgs);
 router.put("/wishlist", middlewareAuth, wishList);
 router.put("/rating", middlewareAuth, rating);
 router.get("/:id", getProductId);
