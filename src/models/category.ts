@@ -1,5 +1,11 @@
 import { Schema, model } from "mongoose";
 
+interface ICategory {
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 const categorySchema = new Schema(
   {
     title: {
@@ -14,4 +20,4 @@ const categorySchema = new Schema(
   }
 );
 
-export default model("Category", categorySchema);
+export default model<ICategory>("Category", categorySchema);
