@@ -1,11 +1,12 @@
-import multer, { FileFilterCallback } from "multer";
+import multer, { FileFilterCallback, diskStorage } from "multer";
 import { Response, NextFunction } from "express";
 import sharp from "sharp";
 import path from "path";
+import { unlinkSync } from "fs";
 ///////////////////////////////////////////
-const multerStorage = multer.diskStorage({
+const multerStorage = diskStorage({
   destination: (_req, _file, cb) => {
-    cb(null, path.join(__dirname, "../../public/images"));
+    cb(null, path.join(__dirname, "../../public/images/"));
   },
   filename: (_req, file: Express.Multer.File, cb) => {
     const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
@@ -27,7 +28,7 @@ export const uploadPhoto = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
   limits: { fieldSize: 5_000_000 },
-}).array("images", 10);
+}).array("image", 10);
 //////////////////////////////////////////////////////////////////////////////////////////
 
 export const productImgResize = async (req: any, _res: Response, next: NextFunction) => {
@@ -40,7 +41,8 @@ export const productImgResize = async (req: any, _res: Response, next: NextFunct
           .resize(300, 300)
           .toFormat("png")
           .png({ quality: 70 })
-          .toFile(`public/images/products/${file.filename}`);
+          .toFile(`public/images/product/${file.filename}`);
+        unlinkSync(`public/images/product/${file.filename}`);
       })
     );
   } else {
@@ -48,8 +50,10 @@ export const productImgResize = async (req: any, _res: Response, next: NextFunct
       .resize(300, 300)
       .toFormat("png")
       .png({ quality: 70 })
-      .toFile(`public/images/products/${req.file?.filename}`);
+      .toFile(`public/images/product/${req.file?.filename}`);
+    unlinkSync(`public/images/product/${req.file?.filename}`);
   }
+  // unlinkSync(`public/images/products/${req.file?.filename}`)
   next();
 };
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,7 +68,8 @@ export const blogImgResize = async (req: Express.Request, _res: Response, next: 
           .resize(300, 300)
           .toFormat("png")
           .png({ quality: 70 })
-          .toFile(`public/images/blogs/${file.filename}`);
+          .toFile(`public/images/blog/${file.filename}`);
+        unlinkSync(`public/images/blog/${file.filename}`);
       })
     );
   } else {
@@ -72,7 +77,9 @@ export const blogImgResize = async (req: Express.Request, _res: Response, next: 
       .resize(300, 300)
       .toFormat("png")
       .png({ quality: 70 })
-      .toFile(`public/images/blogs/${req.file?.filename}`);
+      .toFile(`public/images/blog/${req.file?.filename}`);
+    unlinkSync(`public/images/blog/${req.file?.filename}`);
   }
+  // unlinkSync(`public/images/blogs/${req.file?.filename}`)
   next();
 };
