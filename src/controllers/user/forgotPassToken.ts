@@ -10,7 +10,7 @@ export const forgotPassToken = asyncHandler(async (req: Request, res: Response) 
     const user = await User.findOne({ email });
     if (!user) throw new Error("User not found with this email");
 
-    const token = await user.createPasswordToken();
+    const token = user.createPasswordToken();
     await user.save();
     const resetURL = `Hi, Please follow this link to reset your password. This link is valid till 10 minutes from now. <a href='${process.env.BASE_URL}/api/user/resetpasswordtoken/${token}' >Click here</a>`;
     const data = {
